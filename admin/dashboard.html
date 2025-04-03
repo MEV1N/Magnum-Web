@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Magnum Media Club</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Additional alignment fixes */
+        .admin-main .container {
+            padding: 20px;
+        }
+        
+        .stats-grid {
+            margin-bottom: 30px;
+        }
+        
+        .dashboard-section {
+            margin-top: 30px;
+        }
+        
+        .news-table {
+            width: 100%;
+            margin-top: 20px;
+        }
+        
+        .news-table th, .news-table td {
+            padding: 12px 15px;
+            text-align: left;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body class="admin-dashboard">
+    <header class="admin-header">
+        <div class="container">
+            <nav class="admin-nav">
+                <div class="logo">
+                    <img src="../images/logo.png" alt="Magnum Media Club">
+                    <h1>MAGNUM MEDIA CLUB</h1>
+                </div>
+                <ul>
+                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                    <li><a href="new-article.html">New Article</a></li>
+                    <li><a href="members.html">Members</a></li>
+                    <li><a href="#" class="logout-btn">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-main">
+        <div class="container">
+            <h1>Admin Dashboard</h1>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalArticles">0</div>
+                    <div class="stat-label">Total Articles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="publishedArticles">0</div>
+                    <div class="stat-label">Published</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="draftArticles">0</div>
+                    <div class="stat-label">Drafts</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalViews">0</div>
+                    <div class="stat-label">Total Views</div>
+                </div>
+            </div>
+            
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Manage Articles</h2>
+                    <button class="btn-add" id="addArticleBtn">+ Add Article</button>
+                </div>
+                
+                <table class="news-table">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="articlesTable">
+                        <!-- Articles will be loaded here by JavaScript -->
+                        <tr>
+                            <td colspan="5" style="text-align: center;">No articles yet. Create your first article!</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        // Initialize empty articles array
+        let adminArticles = [];
+        
+        // Update stats on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDashboardStats();
+            
+            // Logout button
+            document.querySelector('.logout-btn').addEventListener('click', () => {
+                window.location.href = 'index.html';
+            });
+            
+            // Add article button
+            document.getElementById('addArticleBtn').addEventListener('click', () => {
+                window.location.href = 'new-article.html';
+            });
+        });
+        
+        // Function to update dashboard statistics
+        function updateDashboardStats() {
+            document.getElementById('totalArticles').textContent = adminArticles.length;
+            document.getElementById('publishedArticles').textContent = 
+                adminArticles.filter(a => a.status === 'published').length;
+            document.getElementById('draftArticles').textContent = 
+                adminArticles.filter(a => a.status === 'draft').length;
+        }
+    </script>
+</body>
+</html>

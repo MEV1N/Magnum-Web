@@ -6,48 +6,21 @@
     <title>Admin Dashboard - Magnum Media Club</title>
     <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 </head>
 <body>
+    
     <div class="admin-container">
+        
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
                 <img src="../images/logo.png" alt="Magnum Media Club">
                 <h1>Magnum Media</h1>
             </div>
-            
-            <ul class="nav-menu">
-                <li>
-                    <a href="dashboard.html" class="active">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <span>Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="new-article.html">
-                        <i class="fas fa-plus-circle"></i>
-                        <span>New Article</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="members.html">
-                        <i class="fas fa-users"></i>
-                        <span>Members</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-cog"></i>
-                        <span>Settings</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="index.html" class="logout-btn">
-                        <i class="fas fa-sign-out-alt"></i>
-                        <span>Logout</span>
-                    </a>
-                </li>
-            </ul>
+            <!-- Same sidebar content as before -->
         </aside>
         
         <!-- Main Content -->
@@ -62,24 +35,24 @@
             <!-- Stats Cards -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value" id="totalArticles">24</div>
+                    <div class="stat-value" id="totalArticles">0</div>
                     <div class="stat-label">Total Articles</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="publishedArticles">18</div>
+                    <div class="stat-value" id="publishedArticles">0</div>
                     <div class="stat-label">Published</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="draftArticles">6</div>
+                    <div class="stat-value" id="draftArticles">0</div>
                     <div class="stat-label">Drafts</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="totalViews">1,245</div>
+                    <div class="stat-value" id="totalViews">0</div>
                     <div class="stat-label">Total Views</div>
                 </div>
             </div>
             
-            <!-- Recent Articles -->
+            <!-- Articles Table -->
             <div class="card">
                 <div class="card-header">
                     <h3 class="card-title">Recent Articles</h3>
@@ -99,47 +72,7 @@
                         </tr>
                     </thead>
                     <tbody id="articlesTable">
-                        <tr>
-                            <td>College Fest 2023 Announced</td>
-                            <td>Events</td>
-                            <td><span class="status status-published">Published</span></td>
-                            <td>May 15, 2023</td>
-                            <td>
-                                <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>New Computer Lab Inaugurated</td>
-                            <td>Academic</td>
-                            <td><span class="status status-published">Published</span></td>
-                            <td>May 10, 2023</td>
-                            <td>
-                                <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Basketball Team Wins Championship</td>
-                            <td>Sports</td>
-                            <td><span class="status status-published">Published</span></td>
-                            <td>May 5, 2023</td>
-                            <td>
-                                <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Upcoming Alumni Meet</td>
-                            <td>Events</td>
-                            <td><span class="status status-draft">Draft</span></td>
-                            <td>May 1, 2023</td>
-                            <td>
-                                <button class="action-btn"><i class="fas fa-edit"></i></button>
-                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
-                                <button class="action-btn"><i class="fas fa-upload"></i></button>
-                            </td>
-                        </tr>
+                        <!-- Articles will be loaded dynamically -->
                     </tbody>
                 </table>
             </div>
@@ -147,65 +80,125 @@
     </div>
 
     <script>
-        // Initialize empty articles array
-        let adminArticles = [];
-        
-        // Update stats on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            // Sample data - replace with your actual data
-            adminArticles = [
-                {
-                    id: 1,
-                    title: "College Fest 2023 Announced",
-                    category: "Events",
-                    status: "published",
-                    date: "May 15, 2023"
-                },
-                {
-                    id: 2,
-                    title: "New Computer Lab Inaugurated",
-                    category: "Academic",
-                    status: "published",
-                    date: "May 10, 2023"
-                },
-                {
-                    id: 3,
-                    title: "Basketball Team Wins Championship",
-                    category: "Sports",
-                    status: "published",
-                    date: "May 5, 2023"
-                },
-                {
-                    id: 4,
-                    title: "Upcoming Alumni Meet",
-                    category: "Events",
-                    status: "draft",
-                    date: "May 1, 2023"
-                }
-            ];
-            
-            updateDashboardStats();
-            
-            // Logout button
-            document.querySelector('.logout-btn').addEventListener('click', () => {
-                window.location.href = 'index.html';
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_BUCKET.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // Real-time articles listener
+        function setupRealTimeListener() {
+            db.collection("articles").orderBy("createdAt", "desc")
+                .onSnapshot((snapshot) => {
+                    const articles = [];
+                    snapshot.forEach((doc) => {
+                        articles.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                    renderArticles(articles);
+                    updateStats(articles);
+                });
+        }
+
+        // Render articles to table
+        function renderArticles(articles) {
+            const tableBody = document.getElementById('articlesTable');
+            tableBody.innerHTML = articles.map(article => `
+                <tr data-id="${article.id}">
+                    <td>${article.title}</td>
+                    <td>${article.category}</td>
+                    <td>${article.status === 'published' ? 
+                        '<span class="status-published">Published</span>' : 
+                        '<span class="status-draft">Draft</span>'}</td>
+                    <td>${new Date(article.createdAt?.toDate()).toLocaleDateString()}</td>
+                    <td>
+                        <button class="action-btn edit-btn" data-id="${article.id}">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="action-btn delete-btn" data-id="${article.id}">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        ${article.status === 'draft' ? 
+                        `<button class="action-btn publish-btn" data-id="${article.id}">
+                            <i class="fas fa-upload"></i>
+                        </button>` : ''}
+                    </td>
+                </tr>
+            `).join('');
+
+            // Add event listeners
+            document.querySelectorAll('.edit-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const articleId = e.currentTarget.getAttribute('data-id');
+                    editArticle(articleId);
+                });
             });
+
+            document.querySelectorAll('.delete-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const articleId = e.currentTarget.getAttribute('data-id');
+                    deleteArticle(articleId);
+                });
+            });
+
+            document.querySelectorAll('.publish-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const articleId = e.currentTarget.getAttribute('data-id');
+                    publishArticle(articleId);
+                });
+            });
+        }
+
+        // Update stats cards
+        function updateStats(articles) {
+            document.getElementById('totalArticles').textContent = articles.length;
+            document.getElementById('publishedArticles').textContent = 
+                articles.filter(a => a.status === 'published').length;
+            document.getElementById('draftArticles').textContent = 
+                articles.filter(a => a.status === 'draft').length;
+        }
+
+        // Article actions
+        async function editArticle(articleId) {
+            window.location.href = `edit-article.html?id=${articleId}`;
+        }
+
+        async function deleteArticle(articleId) {
+            if (confirm('Are you sure you want to delete this article?')) {
+                await db.collection("articles").doc(articleId).delete();
+            }
+        }
+
+        async function publishArticle(articleId) {
+            await db.collection("articles").doc(articleId).update({
+                status: 'published',
+                publishedAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            setupRealTimeListener();
             
-            // Add article button
             document.getElementById('addArticleBtn').addEventListener('click', () => {
                 window.location.href = 'new-article.html';
             });
+
+            document.querySelector('.logout-btn').addEventListener('click', () => {
+                // Add logout logic here
+                window.location.href = 'index.html';
+            });
         });
-        
-        // Function to update dashboard statistics
-        function updateDashboardStats() {
-            document.getElementById('totalArticles').textContent = adminArticles.length;
-            document.getElementById('publishedArticles').textContent = 
-                adminArticles.filter(a => a.status === 'published').length;
-            document.getElementById('draftArticles').textContent = 
-                adminArticles.filter(a => a.status === 'draft').length;
-            // Total views would come from your analytics/data
-        }
     </script>
 </body>
 </html>

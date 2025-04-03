@@ -4,99 +4,163 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Article - Magnum Media Club</title>
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="admin-dashboard">
-    <header class="admin-header">
-        <div class="container">
-            <nav class="admin-nav">
-                <div class="logo">
-                    <img src="../images/logo.png" alt="Magnum Media Club">
-                    <h1>MAGNUM MEDIA CLUB</h1>
-                </div>
-                <ul>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="new-article.html" class="active">New Article</a></li>
-                    <li><a href="members.html">Members</a></li>
-                    <li><a href="#" class="logout-btn">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main class="admin-main">
-        <div class="container">
-            <div class="section-header">
-                <h1>New Article</h1>
-                <a href="dashboard.html" class="btn btn-cancel">Cancel</a>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar (Consistent with dashboard) -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Magnum Media Club">
+                <h1>Magnum Media</h1>
             </div>
             
-            <form id="articleForm" class="add-article-form" enctype="multipart/form-data">
-                <div class="form-row">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" required>
+            <ul class="nav-menu">
+                <li>
+                    <a href="dashboard.html">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="new-article.html" class="active">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>New Article</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="members.html">
+                        <i class="fas fa-users"></i>
+                        <span>Members</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h2>Create New Article</h2>
+                <div class="user-info">
+                    <div class="user-avatar">M</div>
                 </div>
-                
-                <div class="form-row">
-                    <label for="category">Category</label>
-                    <select id="category" required>
-                        <option value="">Select a category</option>
-                        <option value="Campus Life">Campus Life</option>
-                        <option value="Academic">Academic</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Events">Events</option>
-                        <option value="Opinion">Opinion</option>
-                    </select>
-                </div>
-                
-                <div class="form-row">
-                    <label for="content">Content</label>
-                    <textarea id="content" required></textarea>
-                </div>
-                
-                <div class="form-row">
-                    <label for="featuredImage">Featured Image</label>
-                    <input type="file" id="featuredImage" accept="image/*">
-                    <div id="imagePreview" class="image-preview"></div>
-                </div>
-                
-                <div class="form-row">
-                    <label for="mediaFile">Media File (Image/Video)</label>
-                    <input type="file" id="mediaFile" accept="image/*,video/*">
-                    <div id="mediaPreview" class="media-preview"></div>
-                </div>
-                
-                <div class="form-row">
-                    <label>Status</label>
-                    <div class="radio-group">
-                        <label>
-                            <input type="radio" name="status" value="draft" checked>
-                            Save as Draft
-                        </label>
-                        <label>
-                            <input type="radio" name="status" value="published">
-                            Publish Now
-                        </label>
+            </div>
+            
+            <div class="card">
+                <form id="articleForm">
+                    <div class="form-group">
+                        <label for="title">Article Title <span class="required">*</span></label>
+                        <input type="text" id="title" class="form-control" placeholder="Enter article title" required>
                     </div>
-                </div>
-                
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-save">Save Article</button>
-                    <button type="button" id="publishBtn" class="btn btn-publish">Publish</button>
-                </div>
-            </form>
-        </div>
-    </main>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="category">Category <span class="required">*</span></label>
+                            <select id="category" class="form-control" required>
+                                <option value="">Select category</option>
+                                <option value="News">News</option>
+                                <option value="Events">Events</option>
+                                <option value="Academic">Academic</option>
+                                <option value="Sports">Sports</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Status <span class="required">*</span></label>
+                            <div class="radio-group">
+                                <label class="radio-option">
+                                    <input type="radio" name="status" value="published" checked>
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">Publish Now</span>
+                                </label>
+                                <label class="radio-option">
+                                    <input type="radio" name="status" value="draft">
+                                    <span class="radio-custom"></span>
+                                    <span class="radio-label">Save as Draft</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="featuredImage">Featured Image</label>
+                        <div class="image-uploader">
+                            <input type="file" id="featuredImage" accept="image/*">
+                            <label for="featuredImage" class="upload-label">
+                                <i class="fas fa-cloud-upload-alt"></i> Choose Image
+                            </label>
+                            <div class="image-preview" id="imagePreview"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="content">Article Content <span class="required">*</span></label>
+                        <textarea id="content" class="form-control" rows="10" placeholder="Write your article here..." required></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-outline" id="cancelBtn">
+                            <i class="fas fa-times"></i> Cancel
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-save"></i> Save Article
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
 
-    <script src="../js/admin.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Image preview handler
+            const imageInput = document.getElementById('featuredImage');
+            const imagePreview = document.getElementById('imagePreview');
+            
+            imageInput.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.innerHTML = `
+                            <img src="${e.target.result}" alt="Preview">
+                            <button class="btn-remove-image" onclick="document.getElementById('imagePreview').innerHTML='';document.getElementById('featuredImage').value=''">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        `;
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+            
+            // Form submission handler
+            document.getElementById('articleForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                // Add your form submission logic here
+                alert('Article saved successfully!');
+                window.location.href = 'dashboard.html';
+            });
+            
+            // Cancel button handler
+            document.getElementById('cancelBtn').addEventListener('click', () => {
+                if (confirm('Discard unsaved changes?')) {
+                    window.location.href = 'dashboard.html';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-<!-- new-article.html -->
-<form id="newsForm">
-    <input type="text" id="newsTitle" placeholder="News Title" required>
-    <textarea id="newsContent" placeholder="News Content" required></textarea>
-    <button type="submit" id="publishBtn">Publish News</button>
-  </form>
-  <div id="statusMessage"></div>

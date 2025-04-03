@@ -4,88 +4,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Magnum Media Club</title>
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Additional alignment fixes */
-        .admin-main .container {
-            padding: 20px;
-        }
-        
-        .stats-grid {
-            margin-bottom: 30px;
-        }
-        
-        .dashboard-section {
-            margin-top: 30px;
-        }
-        
-        .news-table {
-            width: 100%;
-            margin-top: 20px;
-        }
-        
-        .news-table th, .news-table td {
-            padding: 12px 15px;
-            text-align: left;
-        }
-        
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-    </style>
 </head>
-<body class="admin-dashboard">
-    <header class="admin-header">
-        <div class="container">
-            <nav class="admin-nav">
-                <div class="logo">
-                    <img src="../images/logo.png" alt="Magnum Media Club">
-                    <h1>MAGNUM MEDIA CLUB</h1>
-                </div>
-                <ul>
-                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
-                    <li><a href="new-article.html">New Article</a></li>
-                    <li><a href="members.html">Members</a></li>
-                    <li><a href="#" class="logout-btn">Logout</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <main class="admin-main">
-        <div class="container">
-            <h1>Admin Dashboard</h1>
+<body>
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="../images/logo.png" alt="Magnum Media Club">
+                <h1>Magnum Media</h1>
+            </div>
             
+            <ul class="nav-menu">
+                <li>
+                    <a href="dashboard.html" class="active">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="new-article.html">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>New Article</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="members.html">
+                        <i class="fas fa-users"></i>
+                        <span>Members</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="index.html" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h2>Dashboard Overview</h2>
+                <div class="user-info">
+                    <div class="user-avatar">M</div>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
             <div class="stats-grid">
                 <div class="stat-card">
-                    <div class="stat-value" id="totalArticles">0</div>
+                    <div class="stat-value" id="totalArticles">24</div>
                     <div class="stat-label">Total Articles</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="publishedArticles">0</div>
+                    <div class="stat-value" id="publishedArticles">18</div>
                     <div class="stat-label">Published</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="draftArticles">0</div>
+                    <div class="stat-value" id="draftArticles">6</div>
                     <div class="stat-label">Drafts</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-value" id="totalViews">0</div>
+                    <div class="stat-value" id="totalViews">1,245</div>
                     <div class="stat-label">Total Views</div>
                 </div>
             </div>
             
-            <section class="dashboard-section">
-                <div class="section-header">
-                    <h2 class="section-title">Manage Articles</h2>
-                    <button class="btn-add" id="addArticleBtn">+ Add Article</button>
+            <!-- Recent Articles -->
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">Recent Articles</h3>
+                    <button class="btn btn-primary" id="addArticleBtn">
+                        <i class="fas fa-plus"></i> Add Article
+                    </button>
                 </div>
                 
-                <table class="news-table">
+                <table>
                     <thead>
                         <tr>
                             <th>Title</th>
@@ -96,15 +99,52 @@
                         </tr>
                     </thead>
                     <tbody id="articlesTable">
-                        <!-- Articles will be loaded here by JavaScript -->
                         <tr>
-                            <td colspan="5" style="text-align: center;">No articles yet. Create your first article!</td>
+                            <td>College Fest 2023 Announced</td>
+                            <td>Events</td>
+                            <td><span class="status status-published">Published</span></td>
+                            <td>May 15, 2023</td>
+                            <td>
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>New Computer Lab Inaugurated</td>
+                            <td>Academic</td>
+                            <td><span class="status status-published">Published</span></td>
+                            <td>May 10, 2023</td>
+                            <td>
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Basketball Team Wins Championship</td>
+                            <td>Sports</td>
+                            <td><span class="status status-published">Published</span></td>
+                            <td>May 5, 2023</td>
+                            <td>
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Upcoming Alumni Meet</td>
+                            <td>Events</td>
+                            <td><span class="status status-draft">Draft</span></td>
+                            <td>May 1, 2023</td>
+                            <td>
+                                <button class="action-btn"><i class="fas fa-edit"></i></button>
+                                <button class="action-btn delete"><i class="fas fa-trash"></i></button>
+                                <button class="action-btn"><i class="fas fa-upload"></i></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-            </section>
-        </div>
-    </main>
+            </div>
+        </main>
+    </div>
 
     <script>
         // Initialize empty articles array
@@ -112,6 +152,38 @@
         
         // Update stats on page load
         document.addEventListener('DOMContentLoaded', () => {
+            // Sample data - replace with your actual data
+            adminArticles = [
+                {
+                    id: 1,
+                    title: "College Fest 2023 Announced",
+                    category: "Events",
+                    status: "published",
+                    date: "May 15, 2023"
+                },
+                {
+                    id: 2,
+                    title: "New Computer Lab Inaugurated",
+                    category: "Academic",
+                    status: "published",
+                    date: "May 10, 2023"
+                },
+                {
+                    id: 3,
+                    title: "Basketball Team Wins Championship",
+                    category: "Sports",
+                    status: "published",
+                    date: "May 5, 2023"
+                },
+                {
+                    id: 4,
+                    title: "Upcoming Alumni Meet",
+                    category: "Events",
+                    status: "draft",
+                    date: "May 1, 2023"
+                }
+            ];
+            
             updateDashboardStats();
             
             // Logout button
@@ -132,6 +204,7 @@
                 adminArticles.filter(a => a.status === 'published').length;
             document.getElementById('draftArticles').textContent = 
                 adminArticles.filter(a => a.status === 'draft').length;
+            // Total views would come from your analytics/data
         }
     </script>
 </body>

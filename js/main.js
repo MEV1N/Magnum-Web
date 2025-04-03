@@ -84,3 +84,30 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+// Initialize Firebase (same config as admin.js)
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+function renderNews(news) {
+  const container = document.getElementById("newsContainer");
+  container.innerHTML = news
+    .map(
+      (item) => `
+      <div class="news-item">
+        <h3>${item.title}</h3>
+        <p>${item.content}</p>
+        <small>${new Date(item.timestamp?.toDate()).toLocaleString()}</small>
+      </div>
+    `
+    )
+    .join("");
+}
+
+// Fetch news in real-time
+db.collection("news")
+  .orderBy("timestamp", "desc")
+  .onSnapshot((snapshot) => {
+    const news = [];
+    snapshot.forEach((doc) => news.push({ id: doc.id, ...doc.data() }));
+    renderNews(news);
+  });
